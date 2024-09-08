@@ -1,0 +1,20 @@
+<header>
+  <nav class="nav">
+    <div class="logo left">
+      <a href="/">ClubHouse</a>
+    </div>
+    <div class="right">
+      <% if (!currentUser) {%>
+      <ul>
+        <li><a href="/auth/login">Login</a></li>
+        <li><a href="/auth/signup">Signup</a></li>
+      </ul>
+      <%} else {%>
+      <ul>
+        <li><a href="/message/new">Write message</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+      </ul>
+      <%}%>
+    </div>
+  </nav>
+</header>

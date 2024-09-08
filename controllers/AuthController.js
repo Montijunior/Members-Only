@@ -1,4 +1,5 @@
-const LocalStrategy = require("passport-local");
+const LocalStrategy = require("passport-local").Strategy;
+const passport = require("../app").Passport;
 const AuthModel = require("../models/AuthModel");
 const bcrypt = require("bcryptjs");
 
@@ -35,8 +36,26 @@ const deserializeUser = async (member_id, done) => {
   }
 };
 
+// Login controller
+// const authenticate = passport.authenticate("local", {
+//   successRedirect: "/",
+//   failureRedirect: "/auth/login",
+// });
+
+// logout controller
+const logout = (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+};
+
 module.exports = {
   strategy,
   serializeUser,
   deserializeUser,
+  // authenticate,
+  logout,
 };
