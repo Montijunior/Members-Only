@@ -4,6 +4,7 @@ const express = require("express");
 const session = require("express-session");
 const passport = require("./passport");
 const path = require("path");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 const secret = process.env.SECRET_KEY;
@@ -28,6 +29,9 @@ app.use((req, res, next) => {
   app.locals.currentUser = req.user;
   next();
 });
+
+// App routes
+app.get("/", userRoutes);
 
 app.set(passport);
 
