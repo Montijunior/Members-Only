@@ -46,8 +46,11 @@ class UserModel {
         text: "DELETE FROM message WHERE member_id = $1;",
         value: [member_id],
       };
+      await pool.query(query);
     } catch (error) {
       console.error(error.message);
     }
   }
 }
+
+module.exports = new UserModel();
