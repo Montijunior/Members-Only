@@ -1,19 +1,17 @@
-require("dotenv").config;
+require("dotenv").config();
+const exp = require("constants");
 const express = require("express");
 const session = require("express-session");
+const passport = require("./passport");
 const path = require("path");
-const passport = require("passport");
-const authController = require("./controllers/AuthController");
-const AuthRoutes = require("./routes/authRoutes");
-const UserRoutes = require("./routes/userRoutes");
-const app = require("express");
-const authRouter = require("./routes/authRoutes");
+
+const app = express();
+const secret = process.env.SECRET_KEY;
 
 app.set("views", path.join("views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
-// add connect-pg-simple later
-const secret = process.env.SECRET_KEY;
+app.use(express.static("public"));
 app.use(
   session({
     secret: secret,
@@ -23,25 +21,17 @@ app.use(
   })
 );
 
+// passport
 app.use(passport.session());
-
-// user available to all controllers and views
+// all controllers and viewers router: user
 app.use((req, res, next) => {
   app.locals.currentUser = req.user;
   next();
 });
 
-// Routes
-app.use("/", UserRoutes);
+app.set(passport);
 
-// function 1
-passport.use(authController.strategy);
-// function 2
-passport.serializeUser(authController.serializeUser);
-// function 3
-passport.deserializeUser(authController.deserializeUser);
-
-// Routes
+// Login route
 app.post(
   "/auth/login",
   passport.authenticate("local", {
@@ -50,8 +40,18 @@ app.post(
   })
 );
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Members Only app listening on localhost:${process.env.PORT}`);
+// Logout route
+app.get("/auth/logout", (req, res) => {
+  req.user((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Members Only Application running on localhost:${port}`);
 });
 
-module.exports = passport;
+module.exports = { app };
