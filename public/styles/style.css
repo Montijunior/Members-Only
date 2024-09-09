@@ -110,3 +110,15 @@ label {
   font-size: 20px;
   font-weight: 400;
 }
+/* Error validation */
+.errors {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 8px;
+  padding: 8px 1rem;
+}
+p.error {
+  color: red;
+  font-size: small;
+}
