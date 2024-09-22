@@ -5,11 +5,15 @@
   <body>
     <!-- Ejs nav -->
     <%- include("partials/nav.ejs") %>
-    <h1 class="join">Join ClubHose</h1>
+    <h1 class="join"><%= title %></h1>
     <!-- validation box -->
-    <!-- Error validation to be added later -->
+    <div class="errors">
+      <% if(errors.length > 0) {%> <% errors.forEach((error) => {%>
+      <p class="error"><%= error.msg%></p>
+      <%})%> <%}%>
+    </div>
     <!-- form controls -->
-    <form action="/auth/signup" novalidate autocomplete="off">
+    <form action="/auth/signup" method="post" novalidate autocomplete="off">
       <div class="form-control">
         <label for="first_name">First Name</label>
         <input type="text" name="first_name" id="first_name" />
