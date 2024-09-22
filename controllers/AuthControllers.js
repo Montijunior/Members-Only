@@ -32,3 +32,8 @@ exports.post_sign_up_form = [
     }
   },
 ];
+
+// GET sign-in-form
+exports.get_sign_in_form = (req, res) => {
+  res.render("sign-in-form", { title: "Login" });
+};
