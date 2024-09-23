@@ -123,3 +123,10 @@ p.error {
   padding: 5px 10px;
   font-size: small;
 }
+/* sign in form */
+.login {
+  text-align: center;
+  margin: 30px 0;
+  color: white;
+  font-family: "Press Start 2P", "Poppins";
+}

@@ -4,7 +4,7 @@ const session = require("express-session");
 const pgSession = require("connect-pg-simple")(session);
 const path = require("path");
 const pool = require("./models/pool");
-const passport = require("passport");
+const passport = require("./config/passport");
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 
@@ -29,6 +29,7 @@ app.use(
     },
   })
 );
+// app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
   app.locals.currentUser = req.user;
