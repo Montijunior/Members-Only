@@ -12,3 +12,11 @@ exports.home_page_get = async (req, res) => {
     currentUser: req.user,
   });
 };
+
+// GET new message form
+exports.get_new_message_form = (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect("/auth/login");
+  }
+  return res.render("messageForm", { title: "New Message" });
+};
