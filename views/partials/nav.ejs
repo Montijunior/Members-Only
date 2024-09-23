@@ -11,7 +11,7 @@
       </ul>
       <%} else {%>
       <ul>
-        <li><a href="/message/new">Write message</a></li>
+        <li><a href="/message/<%=currentUser.id %>/new">Write message</a></li>
         <li><a href="/auth/logout">Logout</a></li>
       </ul>
       <%}%>
