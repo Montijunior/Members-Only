@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator");
 const { signUpValidation } = require("../validations/validation");
 const bcrypt = require("bcryptjs");
 const DB = require("../models/queries");
+const passport = require("passport");
 
 // GET sign_up page
 exports.get_sign_up_form = (req, res) => {
@@ -35,5 +36,19 @@ exports.post_sign_up_form = [
 
 // GET sign-in-form
 exports.get_sign_in_form = (req, res) => {
-  res.render("sign-in-form", { title: "Login" });
+  res.render("sign-in-form", { title: "Login", errors: [] });
+};
+
+// POST sign-in-form
+exports.post_sign_in_form = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/auth/login",
+});
+
+// GET log-out
+exports.get_logout = (req, res, next) => {
+  req.logout((err) => {
+    if (err) return next(err);
+  });
+  res.redirect("/");
 };
