@@ -50,4 +50,23 @@ const signUpValidation = [
     .withMessage("password do not match"),
 ];
 
-module.exports = { signUpValidation };
+const messageFormValidations = [
+  body("title")
+    .trim()
+    .notEmpty()
+    .withMessage("title name cannot be empty")
+    .isAlpha()
+    .withMessage("title must contain only letters")
+    .isLength({ min: 5, max: 50 })
+    .withMessage("title should be between 5 and 50 characters"),
+  body("text")
+    .trim()
+    .notEmpty()
+    .withMessage("textarea cannot be empty")
+    .isAlphanumeric()
+    .withMessage("textarea must  contain only letters and numbers")
+    .isLength({ max: 200 })
+    .withMessage("textarea should be maximum of 200 characters"),
+];
+
+module.exports = { signUpValidation, messageFormValidations };
