@@ -5,5 +5,18 @@
   <body>
     <%- include("partials/nav.ejs") %>
     <!-- ejs nav above -->
+    <h1 class="login">Login Now</h1>
+
+    <form action="/auth/login" method="post" novalidate autocomplete="off">
+      <div class="form-control">
+        <label for="username">Email</label>
+        <input type="email" name="username" id="username" />
+      </div>
+      <div class="form-control">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+      </div>
+      <button type="submit">Login</button>
+    </form>
   </body>
 </html>
